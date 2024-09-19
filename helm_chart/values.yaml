@@ -48,15 +48,21 @@ orders:
     type: ClusterIP
 
 zipkin:
-    image:
-        repo: openzipkin/zipkin
-        tag: 2.21
-    resources:
-        limits:
-            cpu: 300m
-            memory: 1000Mi
-        requests:
-            cpu: 100m
-            memory: 300Mi
-    enabled:  false
-    url: zipkin.zipkin.svc.cluster.local
+  image:
+    repo: openzipkin/zipkin
+    tag: 2.21
+  resources:
+    limits:
+      cpu: 300m
+      memory: 1000Mi
+    requests:
+      cpu: 100m
+      memory: 300Mi
+  enabled: false
+  url: zipkin.zipkin.svc.cluster.local
+
+hpa:
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 70
